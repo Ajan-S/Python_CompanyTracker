@@ -10,9 +10,12 @@ The Python Company Tracker is an application which holds a list of companies tha
     - [List Management](#list-management)
 
 ## How To Run
+**Note.** Python is required.
+
 In order to run the file you must:
-  1. Install Python onto your computer
-  2. Run the program in terminal with
+  1. Git clone or download folder to your device.
+  2. Via Terminal access folder where it is stored.
+  3. Run the program in terminal with
      ```bash
      py .\CompanyTracker.py
      ```
