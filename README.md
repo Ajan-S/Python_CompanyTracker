@@ -63,12 +63,12 @@ Listed below are the key functions that have been implemented and how they work:
         self.search_entry.pack()
         self.search_entry.bind("<KeyRelease>", self.search_companies)
         
-        self.listbox = tk.Listbox(root)
-        self.listbox.pack()
+        self.company_listbox = tk.Listbox(root)
+        self.company_listbox.pack()
         
         self.populate_listbox()
 ```
-The initialisation function calls the load_companies and populate_listbox functions, to store the list in the json file as a set in a variable called companies and to take the set and display it in a listbox called companylist. 
+The initialisation function calls the load_companies and populate_listbox functions. These store the list in the json file as a set, in a variable called companies, and takes the set, displaying it in a listbox called companylist. 
 
 ### File Handling
   In order to handle the list of comapnies that are being tracked by the application a json file called companies is used. This is to make sure that the companies that are being tracked is saved somewhere even when the application has been closed. The load function below loads the json file converting its contents from a list to a set, if no file has been found it returns an empty set. As json files can only save lists, the function converts the list into a set to make sure that there are no duplicate companies being displayed.
@@ -95,7 +95,7 @@ In order for a better UI, a listbox which displays the list of companies in the 
         for company in sorted(companies_to_show):
             self.company_listbox.insert(tk.END, company)
 ```
-The searchbar is implemented with a search companies function, which is called every time a character is inputted into the seachbar. It checks through the contents of the listbox and checks if the substring is in any of the companies within the listbox. If it is it displays only these companies in the listbox.
+The searchbar is implemented with a search companies function, which is called every time a character is inputted into the seachbar. It checks through the contents of the listbox and checks if the substring is in any of the companies within the listbox. If it is, it displays only these companies in the listbox.
 ```python
     def search_companies(self, event):
         query = self.search_entry.get().strip().lower()
@@ -104,7 +104,7 @@ The searchbar is implemented with a search companies function, which is called e
 ```
 
 ### List Management
-  In order to manage the list, three functions are implemented. An add function, a remove function and a clear function. The add function, appends the list with the company that has been typed into the input field and into the listbox. An error will popup with a suitable message if nothing is in the input field or if the company is already in the list. After a company has been added the input field is cleared and the new list is saved in the json file.
+  In order to manage the list, three functions are implemented. An add function, a remove function and a clear function. The add function, appends the list with the company that has been typed into the input field and adds this to the listbox. An error will popup with a suitable message if nothing is in the input field or if the company is already in the list. After a company has been added the input field is cleared and the new list is saved in the json file.
   ```python
     def add_company(self):
         company = self.company_input_field .get().strip().lower()
@@ -118,7 +118,7 @@ The searchbar is implemented with a search companies function, which is called e
         else:
             messagebox.showerror("Error", "Please enter a company name.")
   ```
-The remove function removes a company that has been selected by the list cursor. The company is removed from the set of companies and from the listbox, finally being saved into the json file. If no company has been selected a suitable error message is displayed.
+The remove function removes a company that has been selected by the cursor. The company is removed from the set of companies and from the listbox, finally being saved into the json file. If no company has been selected a suitable error message is displayed.
 ```python
   def remove_company(self):
         selected = self.company_listbox.curselection()
@@ -130,7 +130,7 @@ The remove function removes a company that has been selected by the list cursor.
         else:
             messagebox.showerror("Error", "Please select a company to remove.")
 ```
-Finally a clear function is implemented. This fuction clears the list of all the companies and saves the empty list into the file. After clearing all the companies a message is displayed to show that it has been completed.
+Finally a clear function is implemented. This fuction clears the list of all the companies and saves the empty list into the file. After clearing all the companies a message is displayed to show that it has been completed successfully.
 ```python
    def clear_companies(self):
         self.companies.clear()
